@@ -28,6 +28,7 @@ public class Query {
         System.out.println(num);
     }
 
+    //TODO: Fix print index
     public static void searchAND(String[] words) {
         List<Integer> num = new ArrayList<>();
         boolean isFound = false;
