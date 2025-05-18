@@ -45,9 +45,13 @@ public class InvertedIndex {
         word = word.toLowerCase();
         if (index.containsKey(word)) {
             List<Integer> docIds = index.get(word);
-            System.out.println("Kata ditemukan di dokumen: " + docIds);
+            System.out.println("Kata ditemukan di dokumen: ");
+            for (int docId : docIds) {
+                System.out.print(docId + 1 + " ");
+            }
+            System.out.println();
             for (int id : docIds) {
-                System.out.println("Doc " + (id) + ": " + documents.get(id));
+                System.out.println("Doc " + (id + 1) + ": " + documents.get(id));
             }
         } else {
             System.out.println("Kata tidak ditemukan.");
