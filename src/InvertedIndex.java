@@ -2,15 +2,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class InvertedIndex {
 
-  private Map<String, List<Integer>> index = new HashMap<>();
+    private Map<String, List<Integer>> index = new HashMap<>();
     private List<String> documents = new ArrayList<>();
 
     public void buatIndex(String folderPath) throws IOException {
@@ -22,8 +18,10 @@ public class InvertedIndex {
             return;
         }
 
+        File[] sortedFiles = sortFilesByNumber(files);
+
         int docId = 0;
-        for (File file : files) {
+        for (File file : sortedFiles) {
             if (file.isFile() && file.getName().endsWith(".txt")) {
                 String content = readFile(file);
                 documents.add(content);
@@ -40,7 +38,6 @@ public class InvertedIndex {
                 docId++;
             }
         }
-
         System.out.println(Arrays.toString(files));
     }
 
@@ -66,6 +63,22 @@ public class InvertedIndex {
         }
         reader.close();
         return content.toString();
+    }
+
+    private static File[] sortFilesByNumber(File[] files) {
+        Arrays.sort(files, Comparator.comparingInt(f -> extractNumber(f.getName())));
+        return files;
+    }
+
+    private static int extractNumber(String filename) {
+        try {
+            String nameWithoutExtension = filename.contains(".")
+                    ? filename.substring(0, filename.lastIndexOf('.'))
+                    : filename;
+            return Integer.parseInt(nameWithoutExtension.replaceAll("[^0-9]", ""));
+        } catch (NumberFormatException e) {
+            return Integer.MAX_VALUE;
+        }
     }
 }
 
