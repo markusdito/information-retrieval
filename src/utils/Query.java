@@ -9,27 +9,49 @@ public class Query {
     private static List<String> documents = InvertedIndex.getDocuments();
 
     public static void searchOR(String[] words) {
-//        word = word.toLowerCase();
         Set<Integer> num = new HashSet<>();
 
         for (String word : words) {
             word = word.toLowerCase();
             if (index.containsKey(word)) {
                 List<Integer> docIds = index.get(word);
-//                System.out.println("\nKata ditemukan di dokumen(print semua): ");
+//                System.out.println("Kata ditemukan pada:");
                 for (int docId : docIds) {
-//                    System.out.print(docId + 1 + " ");
                     num.add(docId + 1);
+//                    System.out.print(docId + 1 + " ");
                 }
-//            System.out.println();
-//            for (int id : docIds) {
-//                System.out.println("Doc " + (id + 1) + ": " + documents.get(id));
-//            }
             } else {
-                System.out.println("\nKata tidak ditemukan.");
+//                System.out.println("\nKata tidak ditemukan.");
             }
         }
-        System.out.println("\nKata ditemukan di dokumen(gabungan): ");
+        System.out.println("\nKata ditemukan di dokumen: ");
         System.out.println(num);
+    }
+
+    public static void searchAND(String[] words) {
+        List<Integer> num = new ArrayList<>();
+        boolean isFound = false;
+
+        for (String word : words) {
+            word = word.toLowerCase();
+            if (index.containsKey(word)) {
+                List<Integer> docIds = index.get(word);
+                if (num.isEmpty()) {
+                    num.addAll(docIds);
+                } else {
+                    num.retainAll(docIds);
+                }
+                isFound = true;
+            } else {
+                isFound = false;
+                break;
+            }
+        }
+        System.out.println("\nKata ditemukan di dokumen: ");
+        if (isFound) {
+            System.out.println(num);
+        } else {
+            System.out.println("[]");
+        }
     }
 }
