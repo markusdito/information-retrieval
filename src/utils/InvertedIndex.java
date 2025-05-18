@@ -1,3 +1,5 @@
+package utils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -6,8 +8,16 @@ import java.util.*;
 
 public class InvertedIndex {
 
-    private Map<String, List<Integer>> index = new HashMap<>();
-    private List<String> documents = new ArrayList<>();
+    private static Map<String, List<Integer>> index = new HashMap<>();
+    private static List<String> documents = new ArrayList<>();
+
+    public static Map<String, List<Integer>> getIndex() {
+        return index;
+    }
+
+    public static List<String> getDocuments() {
+        return documents;
+    }
 
     public void buatIndex(String folderPath) throws IOException {
         File folder = new File(folderPath);
@@ -39,23 +49,6 @@ public class InvertedIndex {
             }
         }
         System.out.println(Arrays.toString(files));
-    }
-
-    public void search(String word) {
-        word = word.toLowerCase();
-        if (index.containsKey(word)) {
-            List<Integer> docIds = index.get(word);
-            System.out.println("Kata ditemukan di dokumen: ");
-            for (int docId : docIds) {
-                System.out.print(docId + 1 + " ");
-            }
-            System.out.println();
-            for (int id : docIds) {
-                System.out.println("Doc " + (id + 1) + ": " + documents.get(id));
-            }
-        } else {
-            System.out.println("Kata tidak ditemukan.");
-        }
     }
 
     private String readFile(File file) throws IOException {

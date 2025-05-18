@@ -1,6 +1,8 @@
+package utils;
 
 import java.io.IOException;
 import java.util.Scanner;
+import utils.Query;
 
 public class InvertexIndexMain {
     public static void main(String[] args) throws IOException {
@@ -11,10 +13,10 @@ public class InvertexIndexMain {
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("\nMasukkan kata yang ingin dicari: ");
-        String query = scanner.nextLine().trim();
+        String input = scanner.nextLine().trim();
 
-        if (!query.isEmpty()) {
-            index.search(query);
+        if (!input.isEmpty()) {
+            Query.search(input);
         } else {
             System.out.println("Input tidak boleh kosong.");
         }
