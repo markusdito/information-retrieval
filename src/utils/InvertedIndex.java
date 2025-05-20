@@ -8,15 +8,10 @@ import java.util.*;
 
 public class InvertedIndex {
 
-    private static Map<String, List<Integer>> index = new HashMap<>();
-    private static List<String> documents = new ArrayList<>();
+    private static Map<String, ArrayList<Integer>> index = new HashMap<>();
 
-    public static Map<String, List<Integer>> getIndex() {
+    public static Map<String, ArrayList<Integer>> getIndex() {
         return index;
-    }
-
-    public static List<String> getDocuments() {
-        return documents;
     }
 
     public void buatIndex(String folderPath) throws IOException {
@@ -34,7 +29,6 @@ public class InvertedIndex {
         for (File file : sortedFiles) {
             if (file.isFile() && file.getName().endsWith(".txt")) {
                 String content = readFile(file);
-                documents.add(content);
 
                 String[] words = content.toLowerCase().split("\\W+");
                 for (String word : words) {

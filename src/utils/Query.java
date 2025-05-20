@@ -5,8 +5,7 @@ import java.util.*;
 import utils.InvertedIndex;
 
 public class Query {
-    private static Map<String, List<Integer>> index = InvertedIndex.getIndex();
-    private static List<String> documents = InvertedIndex.getDocuments();
+    private static Map<String, ArrayList<Integer>> index = InvertedIndex.getIndex();
 
     public static void searchOR(String[] words) {
         Set<Integer> num = new HashSet<>();
@@ -14,8 +13,8 @@ public class Query {
         for (String word : words) {
             word = word.toLowerCase();
             if (index.containsKey(word)) {
-                List<Integer> docIds = index.get(word);
-//                System.out.println("Kata ditemukan pada:");
+                ArrayList<Integer> docIds = index.get(word);
+//                System.out.printf("\nKata %s ditemukan pada: \n", word);
                 for (int docId : docIds) {
                     num.add(docId + 1);
 //                    System.out.print(docId + 1 + " ");
