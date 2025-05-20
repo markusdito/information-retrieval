@@ -50,7 +50,9 @@ public class Query {
         }
         System.out.println("\nKata ditemukan di dokumen: ");
         if (isFound) {
-            System.out.println(num);
+            for (int id : num) {
+                System.err.print((id + 1) + " ");
+            }
         } else {
             System.out.println("[]");
         }
