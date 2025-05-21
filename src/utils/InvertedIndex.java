@@ -28,12 +28,17 @@ public class InvertedIndex {
         int docId = 0;
         for (File file : sortedFiles) {
             if (file.isFile() && file.getName().endsWith(".txt")) {
+                // read files content here
                 String content = readFile(file);
-
                 String[] words = content.toLowerCase().split("\\W+");
+
+                // do preprocess here
+//                System.out.println(Arrays.toString(words));
+
                 for (String word : words) {
                     if (word.isEmpty()) continue;
 
+                    //build index here
                     index.putIfAbsent(word, new ArrayList<>());
                     if (!index.get(word).contains(docId)) {
                         index.get(word).add(docId);
@@ -42,7 +47,7 @@ public class InvertedIndex {
                 docId++;
             }
         }
-        System.out.println(Arrays.toString(files));
+//        System.out.println(Arrays.toString(files));
     }
 
     private String readFile(File file) throws IOException {
