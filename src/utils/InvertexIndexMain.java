@@ -8,7 +8,7 @@ import utils.Query;
 public class InvertexIndexMain {
     public static void main(String[] args) throws IOException {
         InvertedIndex index = new InvertedIndex();
-        String folderPath = "Koleksi (copy)";
+        String folderPath = "Koleksi";
 
         index.buatIndex(folderPath);
 
@@ -24,5 +24,7 @@ public class InvertexIndexMain {
         }
 
         scanner.close();
+
+
     }
 }

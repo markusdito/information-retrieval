@@ -1,9 +1,11 @@
 package utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.id.IndonesianAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+
+import java.io.*;
 import java.util.*;
 
 public class InvertedIndex {
@@ -32,10 +34,11 @@ public class InvertedIndex {
                 String content = readFile(file);
                 String[] words = content.toLowerCase().split("\\W+");
 
+                System.out.println("Before preprocessing " + words.length);
                 // do preprocess here
-//                System.out.println(Arrays.toString(words));
+                ArrayList<String> pWords = preprocess(words);
 
-                for (String word : words) {
+                for (String word : pWords) {
                     if (word.isEmpty()) continue;
 
                     //build index here
@@ -45,9 +48,28 @@ public class InvertedIndex {
                     }
                 }
                 docId++;
+                System.out.println("Before preprocessing " + pWords.size());
             }
         }
 //        System.out.println(Arrays.toString(files));
+    }
+
+    private ArrayList<String> preprocess(String[] words) throws IOException {
+        Analyzer analyzer = new IndonesianAnalyzer();
+        ArrayList<String> result = new ArrayList<>();
+
+        for (String word : words) {
+            try (TokenStream tokenStream = analyzer.tokenStream("field", word)) {
+                tokenStream.reset();
+                while (tokenStream.incrementToken()) {
+                    result.add(tokenStream.getAttribute(CharTermAttribute.class).toString());
+                }
+
+                tokenStream.end();
+            }
+        }
+        analyzer.close();
+        return result;
     }
 
     private String readFile(File file) throws IOException {
