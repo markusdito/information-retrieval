@@ -18,13 +18,16 @@ public class InvertexIndexMain {
         String[] inputSplitted = input.split("\\s+");
 
         if (!input.isEmpty()) {
-            Query.searchOR(inputSplitted);
+            Query.searchAND(inputSplitted);
         } else {
             System.out.println("Input tidak boleh kosong.");
         }
 
+        System.out.println();
+        System.out.println();
+        System.out.println();
         if (!input.isEmpty()) {
-            Query.searchOROG(inputSplitted);
+            Query.searchANDOG(inputSplitted);
         } else {
             System.out.println("Input tidak boleh kosong.");
         }

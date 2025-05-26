@@ -60,8 +60,54 @@ public class Query {
 
         for (String word : words) {
             word = word.toLowerCase();
+//            System.out.println(index);
             if (index.containsKey(word)) {
                 List<Integer> docIds = index.get(word);
+                System.out.println("AND" + docIds);
+                if (num.isEmpty()) {
+                    num.addAll(docIds);
+                } else {
+                    filterDifference(num, docIds);
+                }
+                isFound = true;
+            } else {
+                System.out.println("[]");
+                isFound = false;
+                break;
+            }
+        }
+
+        System.out.println("\nKata ditemukan di dokumen: ");
+        if (isFound && !num.isEmpty()) {
+            for (int id : num) {
+                System.out.print((id + 1) + " ");
+            }
+        } else {
+            System.out.println("[]");
+        }
+    }
+
+
+    public static void filterDifference(List<Integer> base, List<Integer> filter) {
+        Iterator<Integer> iterator = base.iterator();
+        while (iterator.hasNext()) {
+            Integer item = iterator.next();
+            if (!filter.contains(item)) {
+                iterator.remove();
+            }
+        }
+    }
+
+
+    public static void searchANDOG(String[] words) {
+        List<Integer> num = new ArrayList<>();
+        boolean isFound = false;
+
+        for (String word : words) {
+            word = word.toLowerCase();
+            if (index.containsKey(word)) {
+                List<Integer> docIds = index.get(word);
+                System.out.println("OG" + docIds);
                 if (num.isEmpty()) {
                     num.addAll(docIds);
                 } else {
@@ -69,6 +115,7 @@ public class Query {
                 }
                 isFound = true;
             } else {
+                System.out.println("[]");
                 isFound = false;
                 break;
             }
@@ -76,7 +123,7 @@ public class Query {
         System.out.println("\nKata ditemukan di dokumen: ");
         if (isFound) {
             for (int id : num) {
-                System.err.print((id + 1) + " ");
+                System.out.print((id + 1) + " ");
             }
         } else {
             System.out.println("[]");
