@@ -8,6 +8,33 @@ public class Query {
     private static Map<String, ArrayList<Integer>> index = InvertedIndex.getIndex();
 
     public static void searchOR(String[] words) {
+        ArrayList<Integer> num = new ArrayList<>();
+
+        for (String word : words) { //O(n)
+            word = word.toLowerCase();
+            if (index.containsKey(word)) {
+                ArrayList<Integer> docIds = index.get(word);
+                Iterator<Integer> iterator = docIds.iterator();
+
+                while (iterator.hasNext()) {
+                    int docId = iterator.next();
+                    int docNumber = docId + 1;
+
+                    if (!num.contains(docNumber)) {
+                        num.add(docNumber);
+                    }
+                }
+            }
+        }
+
+        Collections.sort(num);
+
+        System.out.println("\nKata ditemukan di dokumen: ");
+        System.out.println(num);
+    }
+
+
+    public static void searchOROG(String[] words) {
         Set<Integer> num = new HashSet<>();
 
         for (String word : words) {

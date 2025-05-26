@@ -23,6 +23,12 @@ public class InvertexIndexMain {
             System.out.println("Input tidak boleh kosong.");
         }
 
+        if (!input.isEmpty()) {
+            Query.searchOROG(inputSplitted);
+        } else {
+            System.out.println("Input tidak boleh kosong.");
+        }
+
         scanner.close();
 
 
