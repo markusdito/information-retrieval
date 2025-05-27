@@ -48,7 +48,7 @@ public class InvertedIndex {
                     }
                 }
                 docId++;
-                System.out.println("Before preprocessing " + pWords.size());
+                System.out.println("After preprocessing " + pWords.size());
             }
         }
 //        System.out.println(Arrays.toString(files));
