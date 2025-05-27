@@ -63,7 +63,7 @@ public class Query {
 //            System.out.println(index);
             if (index.containsKey(word)) {
                 List<Integer> docIds = index.get(word);
-                System.out.println("AND" + docIds);
+                System.out.println("AND" + word + docIds);
                 if (num.isEmpty()) {
                     num.addAll(docIds);
                 } else {
@@ -71,9 +71,8 @@ public class Query {
                 }
                 isFound = true;
             } else {
-                System.out.println("[]");
+                System.out.println(word + "[]");
                 isFound = false;
-                break;
             }
         }
 

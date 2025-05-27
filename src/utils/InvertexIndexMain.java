@@ -23,14 +23,14 @@ public class InvertexIndexMain {
             System.out.println("Input tidak boleh kosong.");
         }
 
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        if (!input.isEmpty()) {
-            Query.searchANDOG(inputSplitted);
-        } else {
-            System.out.println("Input tidak boleh kosong.");
-        }
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        if (!input.isEmpty()) {
+//            Query.searchANDOG(inputSplitted);
+//        } else {
+//            System.out.println("Input tidak boleh kosong.");
+//        }
 
         scanner.close();
 
